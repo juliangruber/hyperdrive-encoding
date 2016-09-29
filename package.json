@@ -1,0 +1,17 @@
+{
+  "name": "hyperdrive-encoding",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": "juliangruber/hyperdrive-encoding",
+  "description": "Message encoding used by hyperdrive",
+  "devDependencies": {
+    "standard": "^8.2.0",
+    "tap": "^7.1.2"
+  },
+  "scripts": {
+    "test": "tap test.js && standard"
+  },
+  "dependencies": {
+    "protocol-buffers": "^3.1.6"
+  }
+}
