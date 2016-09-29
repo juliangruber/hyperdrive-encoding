@@ -1,6 +1,6 @@
 {
   "name": "hyperdrive-encoding",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "repository": "juliangruber/hyperdrive-encoding",
   "description": "Message encoding used by hyperdrive",
