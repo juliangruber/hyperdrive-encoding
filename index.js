@@ -42,7 +42,7 @@ function encode (obj, buffer, offset) {
   var type = toTypeNumber(typeString || 'file')
   var enc = getEncoding(type)
   var length = enc.encodingLength(obj) + 1
-  var buf = buffer || Buffer(length + offset)
+  var buf = buffer || new Buffer(length + offset)
   enc.encode(obj, buf, 1 + offset)
   buf[offset] = type
   encode.bytes = length

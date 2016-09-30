@@ -4,10 +4,10 @@ var test = require('tap').test
 var encoding = require('./')
 
 test('encoding', function (t) {
-  var message = { content: Buffer('foo'), type: 'index' }
+  var message = { content: new Buffer('foo'), type: 'index' }
   t.deepEqual(encoding.decode(encoding.encode(message)), message)
 
-  t.throws(function () { encoding.decode(Buffer()) })
+  t.throws(function () { encoding.decode(new Buffer()) })
 
   var buf = encoding.encode({ name: 'foo', type: 'file' })
   t.deepEqual(encoding.decode(buf), {
@@ -24,7 +24,7 @@ test('encoding', function (t) {
     uid: 0
   })
 
-  t.throws(function () { encoding.decode(Buffer()) })
+  t.throws(function () { encoding.decode(new Buffer()) })
   t.throws(function () { encoding.encode({}) })
 
   t.end()
