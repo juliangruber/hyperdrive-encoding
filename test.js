@@ -4,14 +4,13 @@ var test = require('tap').test
 var encoding = require('./')
 
 test('encoding', function (t) {
-  var message = { content: Buffer('foo') }
-  t.deepEqual(encoding.decodeIndex(encoding.encode(0, message)), message)
-  t.deepEqual(encoding.decodeIndex(encoding.encode('index', message)), message)
+  var message = { content: Buffer('foo'), type: 'index' }
+  t.deepEqual(encoding.decode(encoding.encode(message)), message)
 
-  t.throws(function () { encoding.decodeIndex(Buffer()) })
+  t.throws(function () { encoding.decode(Buffer()) })
 
-  var buf = encoding.encode(1, { name: 'foo' })
-  t.deepEqual(encoding.decodeEntry(buf), {
+  var buf = encoding.encode({ name: 'foo', type: 'file' })
+  t.deepEqual(encoding.decode(buf), {
     name: 'foo',
     blocks: 0,
     content: null,
@@ -24,9 +23,9 @@ test('encoding', function (t) {
     type: 'file',
     uid: 0
   })
-  t.ok(encoding.encode(undefined, { name: 'foo' }))
 
-  t.throws(function () { encoding.decodeEntry(Buffer()) })
+  t.throws(function () { encoding.decode(Buffer()) })
+  t.throws(function () { encoding.encode({}) })
 
   t.end()
 })

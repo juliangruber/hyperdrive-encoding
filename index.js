@@ -13,27 +13,44 @@ var TYPES = [
   messages.Entry  // hardlink
 ]
 
-exports.decodeEntry = function (buf) {
-  var type = buf[0]
-  if (type > 4) throw new Error('Unknown message type: ' + type)
-  var entry = messages.Entry.decode(buf, 1)
-  entry.type = toTypeString(type)
-  return entry
+module.exports = {
+  decode: decode,
+  encode: encode,
+  encodingLength: encodingLength
 }
 
-exports.decodeIndex = function (buf) {
-  var type = buf[0]
-  if (type !== 0) throw new Error('Expected block to be index')
-  return messages.Index.decode(buf, 1)
-}
-
-exports.encode = function (type, message) {
-  if (typeof type !== 'number') type = toTypeNumber(type)
+function getEncoding (type) {
   var enc = TYPES[type]
-  var buf = Buffer(enc.encodingLength(message) + 1)
-  enc.encode(message, buf, 1)
-  buf[0] = type
+  if (!enc) throw new Error('Unknown message type: ' + toTypeString(type))
+  return enc
+}
+
+function decode (buffer, start, end) {
+  start = start || 0
+  end = end || buffer.length
+  var type = buffer[start]
+  var enc = getEncoding(type)
+  var obj = enc.decode(buffer, 1 + start, end)
+  obj.type = toTypeString(type)
+  decode.bytes = end - start - 1
+  return obj
+}
+
+function encode (obj, buffer, offset) {
+  offset = offset || 0
+  var typeString = obj.type
+  var type = toTypeNumber(typeString || 'file')
+  var enc = getEncoding(type)
+  var length = enc.encodingLength(obj) + 1
+  var buf = buffer || Buffer(length + offset)
+  enc.encode(obj, buf, 1 + offset)
+  buf[offset] = type
+  encode.bytes = length
   return buf
+}
+
+function encodingLength (obj) {
+  return getEncoding(toTypeNumber(obj.type || 'file')).encodingLength(obj) + 1
 }
 
 function toTypeString (t) {
@@ -44,12 +61,10 @@ function toTypeString (t) {
     case 3: return 'symlink'
     case 4: return 'hardlink'
   }
-
   return 'unknown'
 }
 
 function toTypeNumber (t) {
-  t = t || 'file'
   switch (t) {
     case 'index': return 0
     case 'file': return 1
@@ -57,6 +72,5 @@ function toTypeNumber (t) {
     case 'symlink': return 3
     case 'hardlink': return 4
   }
-
   return -1
 }
