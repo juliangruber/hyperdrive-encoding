@@ -5,20 +5,13 @@
   [hyperdrive](https://github.com/mafintosh/hyperdrive).
 
   [![build status](https://travis-ci.org/juliangruber/hyperdrive-encoding.svg?branch=master)](http://travis-ci.org/juliangruber/hyperdrive-encoding)
+  [![abstract-encoding](https://img.shields.io/badge/abstract--encoding-compliant-brightgreen.svg?style=flat)](https://github.com/mafintosh/abstract-encoding)
 
 ## API
 
-### .encode(type='file', message)
+### .decode(buffer[, start][, end])
 
-  Returns a serialized message.
-
-### .decodeEntry(buf)
-
-  Returns the parsed entry object. Throws if `buf` is of invalid type.
-
-### .decodeIndex(buf)
-
-  Returns the parsed index object. Throws if `buf` is of invalid type.
+### .encode(obj[, buffer][, offset])
 
 ## Installation
 
