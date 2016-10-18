@@ -16,10 +16,8 @@
       "brfs"
     ]
   },
-  "devDependencies": {
-    "brfs": "^1.4.3"
-  },
   "dependencies": {
-    "protocol-buffers": "^3.1.6"
+    "protocol-buffers": "^3.1.6",
+    "brfs": "^1.4.3"
   }
 }
