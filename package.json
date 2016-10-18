@@ -11,6 +11,14 @@
   "scripts": {
     "test": "tap test.js && standard"
   },
+  "browserify": {
+    "transform": [
+      "brfs"
+    ]
+  },
+  "devDependencies": {
+    "brfs": "^1.4.3"
+  },
   "dependencies": {
     "protocol-buffers": "^3.1.6"
   }
