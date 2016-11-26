@@ -17,7 +17,7 @@
     ]
   },
   "dependencies": {
-    "protocol-buffers": "^3.1.6",
+    "protocol-buffers": "^3.2.1",
     "brfs": "^1.4.3"
   }
 }
