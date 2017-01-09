@@ -6,7 +6,7 @@
   "description": "Message encoding used by hyperdrive",
   "devDependencies": {
     "standard": "^8.2.0",
-    "tap": "^8.0.0"
+    "tap": "^9.0.3"
   },
   "scripts": {
     "test": "tap test.js && standard"
