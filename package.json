@@ -5,7 +5,7 @@
   "repository": "juliangruber/hyperdrive-encoding",
   "description": "Message encoding used by hyperdrive",
   "devDependencies": {
-    "standard": "^8.2.0",
+    "standard": "^9.0.2",
     "tap": "^10.0.1"
   },
   "scripts": {
